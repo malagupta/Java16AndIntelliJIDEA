@@ -1,10 +1,11 @@
 package com.jetbrains.java16.sealedtypes;
 
-public sealed interface Move permits Athlete, Jump, Kick {
+public interface Move {
 }
 
-final class Athlete implements Move {}
-non-sealed interface Jump extends Move {}
-sealed interface Kick extends Move permits Karate {}
+class Athlete implements Move {}
+interface Jump extends Move {}
+record Player (String sports) implements Move {}
+interface Kick extends Move {}
 
-final class Karate implements Kick {}
+class Karate implements Kick {}
