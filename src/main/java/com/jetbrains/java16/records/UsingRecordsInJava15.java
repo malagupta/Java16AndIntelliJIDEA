@@ -1,5 +1,6 @@
 package com.jetbrains.java16.records;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class UsingRecordsInJava15 {
 
         return allStocks.stream()
                         .map(s -> new TopStock(s, getStockValue(s, dateTime)))
-                        .sorted((s1, s2) -> Double.compare(s1.value(), s2.value()))
+                        .sorted(Comparator.comparingDouble(TopStock::value).reversed())
                         .limit(2)
                         .map(s -> s.stock.getName())
                         .collect(Collectors.toList());
